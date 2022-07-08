@@ -10,6 +10,3 @@ describe('empty spec', () => {
     cy.get('[class="button red"]').contains('Sign in').click()
   })
 })
-
-
-
