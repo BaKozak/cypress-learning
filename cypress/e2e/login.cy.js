@@ -18,6 +18,7 @@ describe('LOGIN', () => {
     })
     cy.url().should('include', 'updates/support-ukraine')
   })
+<<<<<<< Updated upstream
 
 
   // it('We support Ukraine - check', () => {
@@ -27,3 +28,8 @@ describe('LOGIN', () => {
   // })
 
 })
+=======
+})
+
+it('entering My Profile Developer',)
+>>>>>>> Stashed changes
