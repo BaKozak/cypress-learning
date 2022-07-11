@@ -1,6 +1,8 @@
 const login = 'git.hubber@interia.pl'
 const pass = 'LivechatTesting!'
 
+const returnToMain = 
+
 describe('LOGIN', () => {
   it('passes', () => {
     cy.visit("https://accounts.livechat.com/?client_id=49aba739e5310548611ec9a209f7ac03&redirect_uri=https%3A%2F%2Fdevelopers.livechat.com%2Fconsole%2F&response_type=token")
@@ -18,7 +20,6 @@ describe('LOGIN', () => {
     })
     cy.url().should('include', 'updates/support-ukraine')
   })
-
 
   // it('We support Ukraine - check', () => {
   //   cy.get('.css-11iqqdu').should('be.visible')
