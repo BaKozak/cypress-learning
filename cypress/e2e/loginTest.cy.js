@@ -1,25 +1,56 @@
 
 describe('Login and positive tests on My Profile Developer', () => {
 
-    beforeEach('logging in', () => {
+
+    before('', () => {
       cy.loginToApp()
     })
 
-    it('accessing My Developer Profile', () => {
-      cy.get('.css-1v1v4wl').find('.avatar').click()
-      cy.get('.css-18i1gyy').first().click()
-      cy.get('.css-96qgqv').eq(1).then( acDet  => {
-        cy.wrap(acDet).find('#name').clear().type('Creed Bratton')
-        cy.wrap(acDet).find('#jobTitle').clear().type('Quabity Ashuance')
-        cy.wrap(acDet).find('#company').clear().type('Paper Company')
-        cy.wrap(acDet).find('#skills').click()
-        cy.wrap(acDet).find('#JavaScript').click()
-        cy.wrap(acDet).find('#Management').click()
-        // cy.wrap(acDet).find(`#C++`).click() //cos nie znajduje id
-        // cy.wrap(acDet).find('#Research skills').click() // ta sam sytuacja co pozywej tylko podejrzewam ze to wina spacji?
-        // cy.wrap(acDet).find('#Strategic thinking').click() // ta sama sytuacja ze spacja jest
-        cy.wrap(acDet).find('.lc-multiselect-head').type('{selectall}{backspace}')  //tylko usuwa jedno
+    context('Developer profile - functionalities', () => {
+
+      beforeEach('', () => {
+        cy.visit('https://developers.livechat.com/console/profile')
+
+        cy.intercept('https://dev-platform.livechatinc.com/v2/me'
+        ).as('profileInfo')
+        //cy.wait('@profileInfo')
+      })
+
+      it('functionalities - accessing My Developer Profile', () => {
+
+
+        cy.contains('Account ID').should('be.visible')
+        cy.contains('Organization ID').should('be.visible')
+        cy.contains('Full Name').scrollIntoView().should('be.visible')
+        cy.contains('Job Title').should('be.visible')
+        cy.contains('Company Name').should('be.visible')
+        cy.contains('Skills').should('be.visible')
+        cy.contains('Short Bio').should('be.visible')
+        cy.contains('Preferred Contact Email').scrollIntoView().should('be.visible')
+        cy.contains('Discord Username').should('be.visible')
+        cy.contains('My Website URL').should('be.visible')
+        cy.contains('GitHub URL').should('be.visible')
+        cy.contains('Twitter URL').should('be.visible')
+        cy.contains('Join Discord!').scrollIntoView().should('be.visible')
+        cy.contains('What brings you to LiveChat Developer Program?').should('be.visible')
+      })
+
+      it.only('Functionalities - copy account ID ', () => {
+
+        // cy.get('#accountID').within(() => {
+        //   cy.contains('Copy').click().should('have.text', 'Copied!')
+        // })
+
+        cy.get('#accountID').siblings().contains('Copy').click().wait(50).should('have.text', "Copy manually")
+      })
+
+      it.only('Functionalities - copy organization ID ', () => {
+
+        cy.get('#organizationID').siblings().contains('Copy').click().wait(50).should('have.text', "Copy manually")
       })
     })
+
+    context('Developer profile - validatiors', () => {
+    })
   })
-  
+
