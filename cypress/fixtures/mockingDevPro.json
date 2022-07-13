@@ -1,0 +1,29 @@
+{
+    "id": "lgMVctenR",
+    "email": "thePlaceWhereMyEmailShouldBeButThereIsNone",
+    "license": 14291586,
+    "profile": {
+        "name": "BartoszMOCK", 
+        "jobTitle": "TesterMOCK", 
+        "bio": "Sprawdzam Mocking", 
+        "skills": "JavaScript", 
+        "company": "Best", 
+        "website": "I have none", 
+        "github": "secret", 
+        "twitter": "dont use it",
+        "contactEmail": "private", 
+        "discordUserId": "asdf#6942069"
+    },
+    "surveys": [
+        {
+            "question": "",
+            "answer": "",
+            "comment": ""
+        }
+    ],
+    "links": null,
+    "registeredAt": "2022-07-06T22:41:19.651385702+02:00",
+    "lastLoginAt": "2022-07-12T09:29:00.739268263+02:00",
+    "version": 97,
+    "active": true
+}

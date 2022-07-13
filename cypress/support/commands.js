@@ -24,7 +24,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-const login = 'git.hubber@interia.pl'
+const login = 'git.hubber@interia.eu'
 const pass = 'LivechatTesting!'
 
 Cypress.Commands.add('loginToApp', () => {
