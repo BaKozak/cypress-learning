@@ -1,3 +1,4 @@
+
 const formsContents = [
   'Account ID',
   'Organization ID',
@@ -13,91 +14,73 @@ const formsContents = [
   'Twitter URL',
   'Join Discord!',
   'What brings you to LiveChat Developer Program?'
-]       //learn how to make list of variable(??)
+]
+
+const id = [
+  { testCase: 'account id',
+    idType: '#accountID'},
+  { testCase: 'organization id',
+    idType: '#organizationID'}
+]
 
 describe('Login and positive tests on My Profile Developer', () => {
 
-    beforeEach('', () => {
-      cy.intercept('GET', '**/v2/me', {fixture: 'mockingDevPro.json'} ).as('mocker')        // have to get more info about how interpecting works
+    before('', () => {
+      cy.intercept('GET', '**/v2/me', {fixture: 'mockingDevPro.json'} ).as('mocker')
+      cy.visit("https://developers.livechat.com/console/profile")
       cy.loginToApp()
     })
 
     context('Developer profile - functionalities', () => {
 
-      beforeEach('', () => {          //how beforeEach works inside context or its
-        cy.visit('https://developers.livechat.com/console/profile')       
-        cy.intercept('https://dev-platform.livechatinc.com/v2/me'
-        ).as('profileInfo')
-        //cy.wait('@profileInfo')
-      })
-
       it('functionalities - accessing My Developer Profile', () => {
-        // make it shorter/better
-        cy.contains('Account ID').should('be.visible')
-        cy.contains('Organization ID').should('be.visible')
-        cy.contains('Full Name').scrollIntoView().should('be.visible')
-        cy.contains('Job Title').should('be.visible')
-        cy.contains('Company Name').should('be.visible')
-        cy.contains('Skills').should('be.visible')
-        cy.contains('Short Bio').should('be.visible')
-        cy.contains('Preferred Contact Email').scrollIntoView().should('be.visible')
-        cy.contains('Discord Username').should('be.visible')
-        cy.contains('My Website URL').should('be.visible')
-        cy.contains('GitHub URL').should('be.visible')
-        cy.contains('Twitter URL').should('be.visible')
-        cy.contains('Join Discord!').scrollIntoView().should('be.visible')
-        cy.contains('What brings you to LiveChat Developer Program?').should('be.visible')
+        formsContents.forEach(element => cy.contains(element).scrollIntoView().should('be.visible'));
       })
 
-      it('Functionalities - copy account ID ', () => {
-
-        // cy.get('#accountID').within(() => {
-        //   cy.contains('Copy').click().should('have.text', 'Copied!')
-        // })     //ANALYZE
-
-        cy.get('#accountID').siblings().contains('Copy').click().wait(50).should('have.text', "Copy manually")  //check if is working
-        // write code to check if the account ID has decidaded number of characters - selectionStart: 36
+      id.forEach(state =>{
+        it(`Functionalities - copy ${state.testCase}`, () => {
+          cy.get(state.idType).siblings().contains('Copy').click().wait(50).should('have.text', "Copy manually")  //check if is working
+       })        
       })
-
-      it('Functionalities - copy and validation organization ID ', () => {
-
-        cy.get('#organizationID').siblings().contains('Copy').click().wait(50).should('have.text', "Copy manually")  //check if is working
-        // write code to check if the organization ID has decidaded number of characters - selectionStart: 36
-      })
-    })
 
     context('Developer profile - mocking ', () => {
       
-      it.only('Mocking', () => {
+      it('Mocking', () => {
 
-        cy.visit('https://developers.livechat.com/console/profile')
-
-        cy.get('#name').should('have.text', 'BartoszMOCK') //can't find the text that was generated through mocking
-        cy.contains('#jobTitle').should('have.text', 'TesterMOCK')
-        cy.contains('#company').should('have.text', 'Best')
-        cy.contains('.lc-multiselect-head__items').should('have.text', 'JavaScript')
-        cy.contains('#bio').should('have.text', 'Sprawdzam Mocking')
-        cy.contains('#website').should('have.text', 'I have none')
-        cy.contains('#twitter').should('have.text', 'dont use it')
-        cy.contains('#contactEmail').should('have.text', 'private')
+        cy.get('#name').should('have.value', 'Creed Bratton')
+        cy.get('#company').should('have.value', 'Paper Company')
+        cy.get('#skills').children().first().invoke('prop', 'textContent').should('contain', 'JavaScript') //need to analyze
+        cy.get('#bio').should('have.value', 'All I do is so I can go scuba.')
+        cy.get('#website').should('have.value', 'www.creedthought.gov.www/creedthoughts')
+        cy.get('#twitter').should('have.value', 'dont use it')
+        cy.get('#contactEmail').should('have.value', "ilikecircuses@dundermifflin.com")
       })
     })
 
     context('Developer profile - discord transfer - validation', () => {
 
       it('Discord form', () => {
-        // add check if redirecting to new adress is the correct one
-        cy.visit('https://developers.livechat.com/console/profile')
-        cy.contains(`You can now join our developer community. We are waiting for you!`).parent().find('button')//.click()   --// to work uncomment ".click()"
-
+        // CODE FINISHED //MOVE TO BE LAST TEST
+        cy.contains(`You can now join our developer community. We are waiting for you!`).parent().find('button').then( DevCom => {
+          cy.wrap(DevCom).parent().invoke('prop', 'href').should('include', 'https://discord.gg')
+        })
       })
     })
 
     context('Developer profile - purpose change - validation', () => {
       //incomplete
-      it('Purpose', () => {
-        cy.contains('What brings you to LiveChat Developer Program?').parent()
-        cy.get('[for="radio-earn"]') 
+      //1. Dodac dane wejsciowe w postaci mocka na /surveys
+      //2. Zaznaczyc inny field
+      //3. Zdefiniuj nowego mocka na wysylanei danych do surveys
+      //5. Kliknij zapisz
+      //6. sprawdz rezultat
+      it.only('Purpose', () => {
+        cy.contains('What brings you to LiveChat Developer Program?').parent().parent().then( purpose => {
+          cy.wrap(purpose).find('#radio-earn').check({force: true})
+          cy.wrap(purpose).contains('Save changes').click()
+          cy.wrap(purpose).find('#radio-other').check({force: true})
+        })
       })
     })
   })
+})

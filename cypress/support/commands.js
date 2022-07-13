@@ -28,10 +28,9 @@ const login = 'git.hubber@interia.eu'
 const pass = 'LivechatTesting!'
 
 Cypress.Commands.add('loginToApp', () => {
-    cy.visit("https://accounts.livechat.com/?client_id=49aba739e5310548611ec9a209f7ac03&redirect_uri=https%3A%2F%2Fdevelopers.livechat.com%2Fconsole%2F&response_type=token")
     cy.get('#email').type(login)
     cy.get('#password').type(pass)
-    cy.get('[class="button red"]').contains('Sign in').click()
+    cy.get('[class="button red"]').contains('Sign in').click().wait(5000)
 })
 
 Cypress.Commands.add('login', (email, password) => {
@@ -60,3 +59,19 @@ Cypress.Commands.add('login', (email, password) => {
       },
     })
     })
+
+    Cypress.Commands.add(
+      'validateField',
+      (
+        validatorMessage,
+        inputField,
+        messageCssValue = 'rgb(255, 76, 77)',
+        inputCssValue = '1px solid rgb(255, 76, 77)'
+      ) => {
+        cy.contains(validatorMessage)
+          .scrollIntoView()
+          .should('be.visible')
+          .and('have.css', 'color', messageCssValue)
+        cy.get(inputField).should('have.css', 'border', inputCssValue)
+      }
+    )

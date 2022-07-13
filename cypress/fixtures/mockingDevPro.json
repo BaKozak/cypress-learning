@@ -1,18 +1,18 @@
 {
     "id": "lgMVctenR",
-    "email": "thePlaceWhereMyEmailShouldBeButThereIsNone",
+    "email": "git.hubber@interia.eu",
     "license": 14291586,
     "profile": {
-        "name": "BartoszMOCK", 
-        "jobTitle": "TesterMOCK", 
-        "bio": "Sprawdzam Mocking", 
+        "name": "Creed Bratton", 
+        "jobTitle": "Quabity Ashuance", 
+        "bio": "All I do is so I can go scuba.", 
         "skills": "JavaScript", 
-        "company": "Best", 
-        "website": "I have none", 
+        "company": "Paper Company", 
+        "website": "www.creedthought.gov.www/creedthoughts", 
         "github": "secret", 
         "twitter": "dont use it",
-        "contactEmail": "private", 
-        "discordUserId": "asdf#6942069"
+        "contactEmail": "ilikecircuses@dundermifflin.com", 
+        "discordUserId": "test#6942069"
     },
     "surveys": [
         {
