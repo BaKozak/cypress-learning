@@ -26,7 +26,6 @@ const id = [
 describe('Login and positive tests on My Profile Developer', () => {
 
     before('', () => {
-      cy.intercept('GET', '**/v2/me', {fixture: 'mockingDevPro.json'} ).as('mocker')
       cy.visit("https://developers.livechat.com/console/profile")
       cy.loginToApp()
     })
@@ -46,7 +45,7 @@ describe('Login and positive tests on My Profile Developer', () => {
     context('Developer profile - mocking ', () => {
       
       it('Mocking', () => {
-
+        cy.intercept('GET', '**/v2/me', {fixture: 'mockingDevPro.json'} ).as('mocker')
         cy.get('#name').should('have.value', 'Creed Bratton')
         cy.get('#company').should('have.value', 'Paper Company')
         cy.get('#skills').children().first().invoke('prop', 'textContent').should('contain', 'JavaScript') //need to analyze
@@ -69,16 +68,20 @@ describe('Login and positive tests on My Profile Developer', () => {
 
     context('Developer profile - purpose change - validation', () => {
       //incomplete
+
       //1. Dodac dane wejsciowe w postaci mocka na /surveys
       //2. Zaznaczyc inny field
       //3. Zdefiniuj nowego mocka na wysylanei danych do surveys
       //5. Kliknij zapisz
       //6. sprawdz rezultat
       it.only('Purpose', () => {
+
         cy.contains('What brings you to LiveChat Developer Program?').parent().parent().then( purpose => {
-          cy.wrap(purpose).find('#radio-earn').check({force: true})
-          cy.wrap(purpose).contains('Save changes').click()
-          cy.wrap(purpose).find('#radio-other').check({force: true})
+          cy.intercept('GET', '**/v2/me', {fixture: 'mockingDevPro.json'} ).as('mocker')
+          cy.wait('@mocker')
+          cy.intercept('POST', '**/v2/survey', {fixture: 'mockSurvey.json'}).as('newMocker')
+          cy.wrap(purpose).find('#radio-team').scrollIntoView().check({force: true})
+          cy.wrap(purpose).contains('Save changes').scrollIntoView().click()
         })
       })
     })
