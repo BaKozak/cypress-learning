@@ -30,35 +30,11 @@ const pass = 'LivechatTesting!'
 Cypress.Commands.add('loginToApp', () => {
     cy.get('#email').type(login)
     cy.get('#password').type(pass)
-    cy.get('[class="button red"]').contains('Sign in').click()
+    cy.get('[class="button red"]').contains('Sign in').click().wait(1500)
 })
 
-Cypress.Commands.add('login', (email, password) => {
-    Cypress.log({
-      name: 'login',
-    })
-  
-    cy.request({
-      url: 'https://accounts.labs.livechat.com',
-      method: 'POST',
-      form: true,
-      qs: {
-        client_id: Cypress.env('REACT_APP_ACCOUNTS_CLIENTID'),
-        redirect_uri: 'http://localhost:3006/',
-        response_type: 'token',
-      },
-      body: {
-        email: email,
-        password: password,
-      },
-      followRedirect: false,
-      headers: {
-        Referer: `https://accounts.labs.livechat.com/?client_id=${Cypress.env(
-          'REACT_APP_ACCOUNTS_CLIENTID'
-        )}&redirect_uri=http%3A%2F%2Flocalhost%3A3006%2F&response_type=token`,
-      },
-    })
-    })
+
+
 
     Cypress.Commands.add(
       'validateField',
@@ -66,7 +42,7 @@ Cypress.Commands.add('login', (email, password) => {
         validatorMessage,
         inputField,
         messageCssValue = 'rgb(255, 76, 77)',
-        inputCssValue = '1px solid rgb(255, 76, 77)'
+        inputCssValue = '0.987554px solid rgb(255, 76, 77)'
       ) => {
         cy.contains(validatorMessage)
           .scrollIntoView()
@@ -75,3 +51,21 @@ Cypress.Commands.add('login', (email, password) => {
         cy.get(inputField).should('have.css', 'border', inputCssValue)
       }
     )
+
+
+    Cypress.Commands.add(
+      'veryficateColorRed', (
+        message,
+        inputField,
+        messageCss = 'rgb(255, 76, 77)',
+        inputCss = '0.987554px solid rgb(255, 76, 77)'
+      ) => {
+        cy.contains(message)
+          .scrollIntoView()
+          .should('be.visible')
+          .and('have.css', 'color', messageCss)
+        cy.get(inputField).scrollIntoView().should('have.css', 'border', inputCss)
+      }
+    )
+
+

@@ -74,15 +74,42 @@ describe('Login and positive tests on My Profile Developer', () => {
       //3. Zdefiniuj nowego mocka na wysylanei danych do surveys
       //5. Kliknij zapisz
       //6. sprawdz rezultat
-      it.only('Purpose', () => {
+      it('Purpose', () => {
 
-        cy.contains('What brings you to LiveChat Developer Program?').parent().parent().then( purpose => {
-          cy.intercept('GET', '**/v2/me', {fixture: 'mockingDevPro.json'} ).as('mocker')
-          cy.wait('@mocker')
-          cy.intercept('POST', '**/v2/survey', {fixture: 'mockSurvey.json'}).as('newMocker')
-          cy.wrap(purpose).find('#radio-team').scrollIntoView().check({force: true})
-          cy.wrap(purpose).contains('Save changes').scrollIntoView().click()
-        })
+        cy.intercept('GET', '**/v2/me', {fixture: 'mockingDevPro.json'} ).as('mocker')
+        cy.wait('@mocker')
+        cy.intercept('POST', '**/v2/survey', {status: 200}).as('newMocker')
+        cy.wait(3000)
+        cy.get('#radio-earn').scrollIntoView().check({force: true})
+        cy.contains('Save changes').scrollIntoView().click()
+        cy.wait('@newMocker')
+        cy.contains('What brings you to LiveChat Developer Program?').parent().parent().find('button').should('be.disabled')
+      })
+    })
+  })
+
+
+  describe('Developer profile - Unacceptabled values and checking color of --- komunikatów odrzucenia', () => {
+
+    context('Minimal and Maximal length of Name - color veryfication', () => {
+    
+      it.only('', () => {
+        cy.get('#name').clear()
+        cy.contains('Save changes').click()
+        cy.veryficateColorRed('Please enter a valid Full Name. Full Name cannot be empty.','[data-cy="field-input-name"]')
+        cy.get('#name').type('JimothyHalpertPamBeeslyDwightSchruteAndrewBernardStanleyHudsonRyanHowardPhyllisVanceAngelaMartinOscarMartinezKellyKapoorTobyFlendersonMeredithPalmerCreeBratton')
+        cy.veryficateColorRed('Please enter a valid Full Name. Full Name cannot contain more than 64 characters.', '[data-cy="field-input-name"]')
+        cy.get('#jobTitle').type('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567890ABC')
+        cy.veryficateColorRed('Please enter a valid Job Title. Job Title cannot contain more than 128 characters.', '[data-cy="field-input-job-title"]')
+        cy.get('#company').type(`Out of paper, out of stock, there's friendly faces around the block, break loose from the chains that are causing your pain.`)
+        cy.veryficateColorRed(`Please write 'freelancer' if you work alone.`, '[data-cy="field-input-company"]')
+        cy.get('#skills').clear() //tutaj clear nie dziala dla wiecej niz 1 wartości
+        cy.veryficateColorRed(`Please enter a valid skills. Skills cannot be empty.`, '[]') // tutaj bardziej skomplikowane, bo trudniej o lokator do komendy oraz nie ma color tylko jest border-color
+        cy.get('#bio').type(`David here it is. My, philosophy is, basically this. And this is something that I live by. And I always have. And I always will. Don't, ever, for any reason, do anything, to anyone, for any reason, ever, no matter what, no matter where, or who or who you are with, or or where you are going, or, or where you've been. Ever. For any reason. Never ever. Whatsoever.
+        Sometimes I'll start a sentence, and I don't even know where it's going. I just hope I find it along the way. Like an improv conversation. An improversation.`)
+        cy.veryficateColorRed('Please enter a valid Short bio. Short bio cannot contain more than 512 characters.', '[name="bio"]') // moze sie pojawic problem
+        
+
       })
     })
   })
