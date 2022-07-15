@@ -54,7 +54,7 @@ Cypress.Commands.add('loginToApp', () => {
 
 
     Cypress.Commands.add(
-      'veryficateColorRed', (
+      'verificateColorRed', (
         message,
         inputField,
         messageCss = 'rgb(255, 76, 77)',

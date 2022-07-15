@@ -1,0 +1,29 @@
+{
+    "id": "lgMVctenR",
+    "email": "git.hubber@interia.eu",
+    "license": 14291586,
+    "profile": {
+        "name": "", 
+        "jobTitle": "", 
+        "bio": "", 
+        "skills": "JavaScript", 
+        "company": "", 
+        "website": "", 
+        "github": "", 
+        "twitter": "",
+        "contactEmail": "", 
+        "discordUserId": ""
+    },
+    "surveys": [
+        {
+            "question": "",
+            "answer": "",
+            "comment": ""
+        }
+    ],
+    "links": null,
+    "registeredAt": "2022-07-06T22:41:19.651385702+02:00",
+    "lastLoginAt": "2022-07-12T09:29:00.739268263+02:00",
+    "version": 97,
+    "active": true
+}
