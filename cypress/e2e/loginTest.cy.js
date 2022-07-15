@@ -129,7 +129,7 @@ describe('Login and positive tests on My Profile Developer', () => {
       })
 
 
-      it.only('Skills test - color veryfication', () => {
+      it('Skills test - color veryfication', () => {
         cy.intercept('GET', '**/v2/me', {fixture: 'mockingOnlySkills.json'} ).as('SkillMock')
         cy.get('#skills').parent().contains('JavaScript').type('{selectall}{backspace}')
         cy.contains('Profile details').parent().find('button').click()
