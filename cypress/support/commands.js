@@ -30,11 +30,8 @@ const pass = 'LivechatTesting!'
 Cypress.Commands.add('loginToApp', () => {
     cy.get('#email').type(login)
     cy.get('#password').type(pass)
-    cy.get('[class="button red"]').contains('Sign in').click().wait(1500)
+    cy.get('[class="button red"]').contains('Sign in').click().wait(7000)
 })
-
-
-
 
     Cypress.Commands.add(
       'validateField',
@@ -67,5 +64,6 @@ Cypress.Commands.add('loginToApp', () => {
         cy.get(inputField).scrollIntoView().should('have.css', 'border', inputCss)
       }
     )
+
 
 

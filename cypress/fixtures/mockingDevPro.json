@@ -12,7 +12,8 @@
         "github": "secret", 
         "twitter": "dont use it",
         "contactEmail": "ilikecircuses@dundermifflin.com", 
-        "discordUserId": ""
+        "discordUserId": "",
+        "discordUserName": "WilliamCharlesSchneider#0111"
     },
     "surveys": [
         {
@@ -24,6 +25,6 @@
     "links": null,
     "registeredAt": "2022-07-06T22:41:19.651385702+02:00",
     "lastLoginAt": "2022-07-12T09:29:00.739268263+02:00",
-    "version": 97,
-    "active": true
+    "version": 1,
+    "active": false
 }
