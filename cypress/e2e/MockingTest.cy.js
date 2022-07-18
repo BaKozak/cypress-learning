@@ -5,6 +5,11 @@ const idAnwsers = [
         Anwser: 'Creed Bratton'
     },
     {
+        validationName: 'Job Title',
+        Locator: '#jobTitle',
+        Anwser: 'Quabity Ashuance'
+    },
+    {
         validationName: `Company Name`,
         Locator: '#company',
         Anwser: 'Paper Company'
@@ -50,6 +55,10 @@ describe('My Profile Developer - Profile Details - validation of Fields', () => 
             it(`Mocking check - ${state.validationName} `, () => {
                 cy.get(state.Locator).scrollIntoView().should('have.value', state.Anwser)
             })
+        })
+
+        it('Mocking Check - Skills', () => {
+            cy.get('#skills').should('contain', 'JavaScript')
         })
 
 })
