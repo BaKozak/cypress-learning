@@ -32,11 +32,9 @@ context('ID Fields - validation', () => {
     formsContents.forEach(element => cy.contains(element).scrollIntoView().should('be.visible'));
   })
 
-  it(`functionalities - validation of showing info of copying text from ID's `, () => {
-    id.forEach(state =>{
-      it(`Functionalities - copy ${state.testCase}`, () => {
-        cy.get(state.idType).siblings().contains('Copy').click().wait(50).should('have.text', "Copy manually")  //ANALIZA
-      })
+  id.forEach(state =>{
+    it(`Functionalities - copy ${state.testCase}`, () => {
+      cy.get(state.idType).siblings().contains('Copy').click().wait(50).should('have.text', "Copy manually")
     })
   })
 })

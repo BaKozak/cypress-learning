@@ -30,7 +30,7 @@ const pass = 'LivechatTesting!'
 Cypress.Commands.add('loginToApp', () => {
     cy.get('#email').type(login)
     cy.get('#password').type(pass)
-    cy.get('[class="button red"]').contains('Sign in').click().wait(7000)
+    cy.get('[class="button red"]').contains('Sign in').click().wait(2000)
 })
 
     Cypress.Commands.add(
