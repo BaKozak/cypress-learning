@@ -24,12 +24,46 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-const login = 'git.hubber@interia.pl'
+const login = 'git.hubber@interia.eu'
 const pass = 'LivechatTesting!'
 
 Cypress.Commands.add('loginToApp', () => {
-    cy.visit("https://accounts.livechat.com/?client_id=49aba739e5310548611ec9a209f7ac03&redirect_uri=https%3A%2F%2Fdevelopers.livechat.com%2Fconsole%2F&response_type=token")
     cy.get('#email').type(login)
     cy.get('#password').type(pass)
-    cy.get('[class="button red"]').contains('Sign in').click().wait(5000)
+    cy.get('[class="button red"]').contains('Sign in').click().wait(2000)
 })
+
+    Cypress.Commands.add(
+      'validateField',
+      (
+        validatorMessage,
+        inputField,
+        messageCssValue = 'rgb(255, 76, 77)',
+        inputCssValue = '0.987554px solid rgb(255, 76, 77)'
+      ) => {
+        cy.contains(validatorMessage)
+          .scrollIntoView()
+          .should('be.visible')
+          .and('have.css', 'color', messageCssValue)
+        cy.get(inputField).should('have.css', 'border', inputCssValue)
+      }
+    )
+
+
+    Cypress.Commands.add(
+      'verificateColorRed', (
+        message,
+        inputField,
+        messageCss = 'rgb(255, 76, 77)',
+        inputCss = '0.987554px solid rgb(255, 76, 77)'
+      ) => {
+        cy.contains(message)
+          .scrollIntoView()
+          .should('be.visible')
+          .and('have.css', 'color', messageCss)
+        cy.get(inputField).scrollIntoView().should('have.css', 'border', inputCss)
+      }
+    )
+
+
+

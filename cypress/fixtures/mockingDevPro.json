@@ -1,0 +1,30 @@
+{
+    "id": "lgMVctenR",
+    "email": "git.hubber@interia.eu",
+    "license": 14291586,
+    "profile": {
+        "name": "Creed Bratton", 
+        "jobTitle": "Quabity Ashuance", 
+        "bio": "All I do is so I can go scuba.", 
+        "skills": "JavaScript", 
+        "company": "Paper Company", 
+        "website": "www.creedthought.gov.www/creedthoughts", 
+        "github": "secret", 
+        "twitter": "dont use it",
+        "contactEmail": "ilikecircuses@dundermifflin.com", 
+        "discordUserId": "",
+        "discordUserName": "WilliamCharlesSchneider#0111"
+    },
+    "surveys": [
+        {
+            "question": "purpose",
+            "answer": "other",
+            "comment": "Test comment"
+        }
+    ],
+    "links": null,
+    "registeredAt": "2022-07-06T22:41:19.651385702+02:00",
+    "lastLoginAt": "2022-07-12T09:29:00.739268263+02:00",
+    "version": 1,
+    "active": false
+}
