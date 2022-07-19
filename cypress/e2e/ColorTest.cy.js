@@ -81,7 +81,7 @@ describe('Red colors of input fields and notifications', () => {
 
     
     it('Skills test - color verification', () => {
-        cy.intercept('GET', '**/v2/me', {fixture: 'mockingOnlySkills.json'} ).as('SkillMock')  //uncomment only if done separately from other tests - change 'it' to 'it.only'
+        cy.intercept('GET', '**/v2/me', {fixture: 'mockingOnlySkills.json'} ).as('SkillMock')
         cy.get('#skills').parent().contains('JavaScript').type('{selectall}{backspace}')
         cy.contains('Profile details').parent().find('button').click()
         cy.get(`.lc-multiselect-head`).scrollIntoView().and('have.css', 'border-color', 'rgb(255, 76, 77)')

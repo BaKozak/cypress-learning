@@ -34,23 +34,6 @@ Cypress.Commands.add('loginToApp', () => {
 })
 
     Cypress.Commands.add(
-      'validateField',
-      (
-        validatorMessage,
-        inputField,
-        messageCssValue = 'rgb(255, 76, 77)',
-        inputCssValue = '0.987554px solid rgb(255, 76, 77)'
-      ) => {
-        cy.contains(validatorMessage)
-          .scrollIntoView()
-          .should('be.visible')
-          .and('have.css', 'color', messageCssValue)
-        cy.get(inputField).should('have.css', 'border', inputCssValue)
-      }
-    )
-
-
-    Cypress.Commands.add(
       'verificateColorRed', (
         message,
         inputField,
