@@ -1,4 +1,3 @@
-//import faker from 'faker'
 import { faker } from '@faker-js/faker';
 
 const key = [
